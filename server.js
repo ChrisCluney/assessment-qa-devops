@@ -30,7 +30,7 @@ rollbar.log('Hello world!')
 
 app.use(express.static(path.join(__dirname, '../assessment-qa-devops/public/')))
 
-
+// app.use(express.static(path.join(__dirname, "/../public")));
 
 
 
