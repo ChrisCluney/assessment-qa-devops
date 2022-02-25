@@ -28,7 +28,7 @@ rollbar.log('Hello world!')
 //     res.sendFile(path.join(__dirname, '../assessment-qa-devops/public/index.css'))
 // })
 
-app.use(express.static(path.join(__dirname, '../assessment-qa-devops/public')))
+app.use(express.static(path.join(__dirname, '../assessment-qa-devops/public/')))
 
 
 
