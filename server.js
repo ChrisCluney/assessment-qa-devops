@@ -18,9 +18,9 @@ var rollbar = new Rollbar({
 // record a generic message and send it to Rollbar
 rollbar.log('Hello world!')
 
-// app.get('/', (req, res) => {
-//     res.sendFile(path.join(__dirname, '../assessment-qa-devops/public/index.html'))
-// })
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/index.html'))
+})
 // app.get('/', (req, res) => {
 //     res.sendFile(path.join(__dirname, '../assessment-qa-devops/public/index.js'))
 // })
@@ -28,9 +28,9 @@ rollbar.log('Hello world!')
 //     res.sendFile(path.join(__dirname, '../assessment-qa-devops/public/index.css'))
 // })
 
-app.use(express.static(path.join(__dirname, '../assessment-qa-devops/public/')))
+// app.use(express.static(path.join(__dirname, 'public/index.html')))
 
-// app.use(express.static(path.join(__dirname, "/../public")));
+app.use(express.static(path.join(__dirname, "public")));
 
 
 
