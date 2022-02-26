@@ -18,17 +18,13 @@ var rollbar = new Rollbar({
 // record a generic message and send it to Rollbar
 rollbar.log('Hello world!')
 
+
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/index.html'))
+    rollbar.log('im online!')
 })
-// app.get('/', (req, res) => {
-//     res.sendFile(path.join(__dirname, '../assessment-qa-devops/public/index.js'))
-// })
-// app.get('/', (req, res) => {
-//     res.sendFile(path.join(__dirname, '../assessment-qa-devops/public/index.css'))
-// })
 
-// app.use(express.static(path.join(__dirname, 'public/index.html')))
 
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -49,6 +45,7 @@ app.get('/api/robots', (req, res) => {
     try {
         res.status(200).send(botsArr)
     } catch (error) {
+        rollbar.critical('could not find botsArr')
         console.log('ERROR GETTING BOTS', error)
         res.sendStatus(400)
     }
@@ -61,6 +58,7 @@ app.get('/api/robots/five', (req, res) => {
         let compDuo = shuffled.slice(6, 8)
         res.status(200).send({choices, compDuo})
     } catch (error) {
+        rollbar.error('Could not get five bots!')
         console.log('ERROR GETTING FIVE BOTS', error)
         res.sendStatus(400)
     }
@@ -87,12 +85,15 @@ app.post('/api/duel', (req, res) => {
         if (compHealthAfterAttack > playerHealthAfterAttack) {
             playerRecord.losses++
             res.status(200).send('You lost!')
+            rollbar.debug('the computer won')
         } else {
             playerRecord.losses++
+            rollbar.info('Player won')
             res.status(200).send('You won!')
         }
     } catch (error) {
         console.log('ERROR DUELING', error)
+        rollbar.warning("something went wrong with the duel")
         res.sendStatus(400)
     }
 })
